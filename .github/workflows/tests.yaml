@@ -1,0 +1,24 @@
+name: Playwright Tests in Docker
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t playwright-tests .
+
+      - name: Run tests in container
+        run: |
+          docker run --rm \
+            --ipc=host \
+            playwright-tests
