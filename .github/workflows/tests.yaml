@@ -2,9 +2,9 @@ name: Playwright Tests in Docker
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ "main", "master", "feature/*" ]
   pull_request:
-    branches: [ main, master ]
+    branches: [ "main", "master" ]
 
 jobs:
   test:
@@ -17,8 +17,17 @@ jobs:
       - name: Build Docker image
         run: docker build -t playwright-tests .
 
-      - name: Run tests in container
+      - name: Run tests in container and extract report
         run: |
-          docker run --rm \
-            --ipc=host \
-            playwright-tests
+          docker create --name test-container --ipc=host playwright-tests
+          docker start -a test-container || true
+          docker cp test-container:/app/playwright-report ./playwright-report || true
+          docker rm test-container
+
+      - name: Upload Playwright Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
