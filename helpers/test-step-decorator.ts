@@ -1,4 +1,4 @@
-import { test } from '@playwright/test';
+import { test } from "../fotoblog-fixtures";
 
 export function step(target: Function, context: ClassMethodDecoratorContext) {
   return function replacementMethod(this: any, ...args: any) {

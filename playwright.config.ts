@@ -35,7 +35,7 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'Fotoblog Deployed - Chrome',
+      name: 'Fotoblog PROD - Chrome',
       use: {
         ...devices['Desktop Chrome'],
         baseURL: 'https://photos.besoftware.pro',

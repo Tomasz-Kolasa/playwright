@@ -1,4 +1,4 @@
-import { test, expect } from '../../fotoblog-fixtures';
+import { test, expect } from '../fotoblog-fixtures';
 
 // test data
 const invalidUser: string = 'invalid_user';

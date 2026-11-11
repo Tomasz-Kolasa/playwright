@@ -1,4 +1,4 @@
-import { Locator, Page } from "@playwright/test";
+import { Locator, Page } from "../fotoblog-fixtures";
 import { step } from "../helpers/test-step-decorator";
 import { PublicNavigation } from "./components/public-navigation";
 
