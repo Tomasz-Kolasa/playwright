@@ -16,15 +16,6 @@ export const test = base.extend<FotoblogFixtures>({
     await use(new PageManager(page));
   },
 
-  // loginPage: async ({ page }, use) => {
-  //   await use(new LoginPage(page, new PublicNavigation(page)));
-  // },
-
-  // homePublicPage: async ({ page }, use) => {
-  //   const { HomePublicPage } = await import('./pages/home-public-page');
-  //   await use(new HomePublicPage(page, new PublicNavigation(page)));
-  // }
-
 });
 
 export { expect, Page, Locator } from '@playwright/test';

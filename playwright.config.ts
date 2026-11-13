@@ -1,5 +1,14 @@
 import { defineConfig, devices } from '@playwright/test';
 
+import * as dotenv from 'dotenv';
+import * as path from 'path';
+dotenv.config();
+
+// determinate the environment based on the ENV variable, defaulting to 'prod' if not set
+const environment = process.env.ENV || 'prod';
+dotenv.config({ path: path.resolve(__dirname, `.env.${environment}`) });
+
+
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
@@ -26,7 +35,7 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
-    // baseURL: 'http://localhost:3000',
+    baseURL: process.env.BASE_URL, // determined by the .env.[prod|test|dev|staging] file based on the ENV variable
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
@@ -35,12 +44,10 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'Fotoblog PROD - Chrome',
+      name: 'Fotoblog - Chrome',
       use: {
         ...devices['Desktop Chrome'],
-        baseURL: 'https://photos.besoftware.pro',
       },
-
     },
 
     // {

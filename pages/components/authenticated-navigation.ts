@@ -4,12 +4,12 @@ import { step } from "../../helpers/test-step-decorator";
 export class AuthenticatedNavigation {
 
     readonly page: Page;
-    private readonly homeButton: Locator;
-    private readonly loginButton: Locator;
-    private readonly tagsButton: Locator;
-    private readonly addPhotoButton: Locator;
-    private readonly settingsButton: Locator;
-    private readonly logoutButton: Locator;
+    readonly homeButton: Locator;
+    readonly loginButton: Locator;
+    readonly tagsButton: Locator;
+    readonly addPhotoButton: Locator;
+    readonly settingsButton: Locator;
+    readonly logoutButton: Locator;
 
     constructor(page: Page) {
         this.page = page;

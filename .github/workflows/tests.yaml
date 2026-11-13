@@ -18,8 +18,17 @@ jobs:
         run: docker build -t playwright-tests .
 
       - name: Run tests in container and extract report
+        env:
+          CI_VALID_USERNAME: ${{ secrets.VALID_USER_NAME }}
+          CI_VALID_PASSWORD: ${{ secrets.VALID_USER_PASSWORD }}
+          ENV: prod
         run: |
-          docker create --name test-container --ipc=host playwright-tests
+          docker create --name test-container --ipc=host \
+          -e CI_VALID_USERNAME="$CI_VALID_USERNAME" \
+          -e CI_VALID_PASSWORD="$CI_VALID_PASSWORD" \
+          -e ENV="$ENV" \
+          playwright-tests
+          
           docker start -a test-container || true
           docker cp test-container:/app/playwright-report ./playwright-report || true
           docker rm test-container

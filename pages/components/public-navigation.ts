@@ -4,8 +4,8 @@ import { step } from "../../helpers/test-step-decorator";
 export class PublicNavigation {
 
     readonly page: Page;
-    private readonly homeButton: Locator;
-    private readonly loginButton: Locator;
+    readonly homeButton: Locator;
+    readonly loginButton: Locator;
 
     constructor(page: Page) {
         this.page = page;
