@@ -29,9 +29,13 @@ jobs:
           -e ENV="$ENV" \
           playwright-tests
           
-          docker start -a test-container || true
+          docker start -a test-container || EXIT_CODE=$?
           docker cp test-container:/app/playwright-report ./playwright-report || true
           docker rm test-container
+
+          if [ -n "$EXIT_CODE" ]; then
+            exit $EXIT_CODE
+          fi
 
       - name: Upload Playwright Report
         uses: actions/upload-artifact@v4
