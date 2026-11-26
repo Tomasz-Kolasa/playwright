@@ -14,7 +14,21 @@ test.describe('Unsuccessful Login', () => {
     test('Unsuccessful login with invalid credentials', async ({ pageManager }) => {
         await pageManager.loginPage.loginWith(invalidUser, invalidPassword);
 
-        await expect(pageManager.loginPage.errorMessage).toBeVisible();
+        await expect(pageManager.loginPage.errorMessage).toBeVisible({timeout:10000});
+    });
+
+});
+
+test.describe('Successful Login', () => {
+
+    test('Successful login with valid credentials', async ({pageManager}) => {
+        await pageManager.loginPage.goTo();
+        await pageManager.loginPage.login(
+        process.env.CI_VALID_USERNAME!,
+        process.env.CI_VALID_PASSWORD!
+        );
+
+        await expect(pageManager.homeAuthenticatedPage.page).toHaveURL(pageManager.homeAuthenticatedPage.homeUrl)    
     });
 
 });

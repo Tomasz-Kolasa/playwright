@@ -11,4 +11,10 @@ export class HomePublicPage {
         this.page = page;
         this.navigation = navigation;
     }
+
+  @step
+  async goTo() {
+    await this.page.goto(this.homeUrl);
+  }
+
 }

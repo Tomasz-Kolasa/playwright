@@ -2,11 +2,11 @@ import { test, expect } from "../fotoblog-fixtures";
 
 test.describe('Public Home Page Navigation test', () => {
 
-  test('Navigation to login page', async ({ page, pageManager }) => {
+  test('Navigation to login page', async ({ pageManager }) => {
 
-    await page.goto(pageManager.homePublicPage.homeUrl);
+    await pageManager.homePublicPage.goTo();
     await pageManager.loginPage.navigation.goToLogin();
-    await expect(page).toHaveURL(pageManager.loginPage.loginUrl);
+    await expect(pageManager.homePublicPage.page).toHaveURL(pageManager.loginPage.loginUrl);
 
   });
 
@@ -21,10 +21,9 @@ test.describe('Public Home Page Navigation test', () => {
 
 test.describe('Authenticated Home Page Navigation test', () => {
 
-  test.beforeEach(async ({ page, pageManager }) => {
+  test.beforeEach(async ({ pageManager }) => {
 
-    await page.goto(pageManager.homePublicPage.homeUrl);
-    await pageManager.loginPage.navigation.goToLogin();
+    await pageManager.loginPage.goTo();
     await pageManager.loginPage.login(
         process.env.CI_VALID_USERNAME!,
         process.env.CI_VALID_PASSWORD!
