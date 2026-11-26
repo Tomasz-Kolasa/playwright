@@ -18,3 +18,15 @@ test.describe('Unsuccessful Login', () => {
     });
 
 });
+
+test.describe('Successful Login', () => {
+
+    test('Successful login with valid credentials', async ({pageManager}) => {
+        await pageManager.loginPage.goTo();
+        await pageManager.loginPage.login(
+        process.env.CI_VALID_USERNAME!,
+        process.env.CI_VALID_PASSWORD!
+        );
+    });
+
+});
